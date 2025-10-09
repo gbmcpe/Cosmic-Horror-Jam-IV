@@ -108,3 +108,6 @@ InitTestScene*.unity*
 *.overrideController
 *.mask
 *.playable
+
+# Ignore SRC directory (duplicate Unity project)
+SRC/
