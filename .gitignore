@@ -97,3 +97,14 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Small Unity files that should be tracked in Git (not LFS)
+*.prefab
+*.mat
+*.physicMaterial
+*.physicsMaterial2D
+*.controller
+*.anim
+*.overrideController
+*.mask
+*.playable
