@@ -52,10 +52,16 @@ public class PlayerControls : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         { grounded = true; }
+
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            print("GAME OVER!");
+        
+        }
+        
     }
     
     
-
 
 
 
