@@ -1,26 +1,20 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObstacleMover : MonoBehaviour
 {
 
     [SerializeField] private float speed;
-    
-    private Rigidbody ObRigid;
+    private Rigidbody Obstacle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ObRigid = GetComponent<Rigidbody>();
+        Obstacle = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       ObRigid.linearVelocity = new Vector3(0, 0, -speed);
-
-
-        if (ObRigid.position.z < -10)
-        { Destroy(gameObject); }
+        Obstacle.linearVelocity = new Vector3(0, 0, -speed);
     }
 }

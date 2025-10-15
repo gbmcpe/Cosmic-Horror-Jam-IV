@@ -7,6 +7,8 @@ public class InfiniteGeneration : MonoBehaviour
 
 
     public GameObject[] Obstacles;
+    
+
 
 private bool CreatingObstacle = false;
 
@@ -29,7 +31,8 @@ private bool CreatingObstacle = false;
         GameObject Clone = Instantiate(Obstacles[obstaclenum]);
 
         Clone.SetActive(true);
-    
+        
+        
         
         yield return new WaitForSeconds(3);
 
