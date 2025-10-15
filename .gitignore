@@ -113,13 +113,13 @@ InitTestScene*.unity*
 SRC/
 
 # Ignore nested Unity project directories and their generated files
-CosmicHorrosJam/Library/
-CosmicHorrosJam/Temp/
-CosmicHorrosJam/Logs/
-CosmicHorrosJam/UserSettings/
-CosmicHorrosJam/Obj/
-CosmicHorrosJam/Build/
-CosmicHorrosJam/Builds/
-CosmicHorrosJam/*.csproj
-CosmicHorrosJam/*.sln
-CosmicHorrosJam/.vscode/
+CosmicHorrorUnityProject/Library/
+CosmicHorrorUnityProject/Temp/
+CosmicHorrorUnityProject/Logs/
+CosmicHorrorUnityProject/UserSettings/
+CosmicHorrorUnityProject/Obj/
+CosmicHorrorUnityProject/Build/
+CosmicHorrorUnityProject/Builds/
+CosmicHorrorUnityProject/*.csproj
+CosmicHorrorUnityProject/*.sln
+CosmicHorrorUnityProject/.vscode/
