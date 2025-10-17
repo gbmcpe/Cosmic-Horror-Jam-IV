@@ -12,7 +12,7 @@ public class ScoringSystem : MonoBehaviour
     void Start()
     {
         Score = 0;
-        scoreText.text = "Score: " + Score.ToString();
+        scoreText.text = Score.ToString();
         StartCoroutine(ScoreIncrement());
     }
 
@@ -23,7 +23,7 @@ public class ScoringSystem : MonoBehaviour
         {
             yield return new WaitForSeconds(1f); // Wait 1 second
             Score += 1;
-            scoreText.text = "Score: " + Score.ToString();
+            scoreText.text = Score.ToString();
         }
     }
 }

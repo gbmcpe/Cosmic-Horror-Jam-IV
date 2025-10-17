@@ -6,7 +6,7 @@ public class InfiniteGeneration : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public GameObject[] Obstacles;
+    public List<GameObject> Obstacles;
     public List<Transform> lanes;
 
 private bool CreatingObstacle = false;
@@ -27,7 +27,7 @@ private int counter = 0;
 
     IEnumerator ObstacleGen()
     {
-        int obstaclenum = Random.Range(0, 7);
+        int obstaclenum = Random.Range(0, Obstacles.Count);
         int laneIndex = Random.Range(0, lanes.Count);
 
         GameObject Clone = Instantiate(Obstacles[obstaclenum]);
