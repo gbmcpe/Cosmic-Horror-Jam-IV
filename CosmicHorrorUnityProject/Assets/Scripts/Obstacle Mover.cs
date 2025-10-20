@@ -4,7 +4,8 @@ using UnityEngine;
 public class ObstacleMover : MonoBehaviour
 {
 
-    [SerializeField] public float speed;
+    private float speed = 10;
+    public int width;
     
     private Rigidbody ObRigid;
 
