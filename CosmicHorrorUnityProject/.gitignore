@@ -4,6 +4,7 @@
 #
 .utmp/
 /[Ll]ibrary/
+Library/PackageCache/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
@@ -97,29 +98,3 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
-
-# Small Unity files that should be tracked in Git (not LFS)
-*.prefab
-*.mat
-*.physicMaterial
-*.physicsMaterial2D
-*.controller
-*.anim
-*.overrideController
-*.mask
-*.playable
-
-# Ignore SRC directory (duplicate Unity project)
-SRC/
-
-# Ignore nested Unity project directories and their generated files
-CosmicHorrorUnityProject/Library/
-CosmicHorrorUnityProject/Temp/
-CosmicHorrorUnityProject/Logs/
-CosmicHorrorUnityProject/UserSettings/
-CosmicHorrorUnityProject/Obj/
-CosmicHorrorUnityProject/Build/
-CosmicHorrorUnityProject/Builds/
-CosmicHorrorUnityProject/*.csproj
-CosmicHorrorUnityProject/*.sln
-CosmicHorrorUnityProject/.vscode/
