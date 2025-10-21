@@ -66,22 +66,6 @@ public class CosmicAttackScript : MonoBehaviour
         if (objectToSpawn != null && spawnSpots[selectedSpotIndex] != null)
         {
             spawnedObject = Instantiate(objectToSpawn, spawnSpots[selectedSpotIndex].position, spawnSpots[selectedSpotIndex].rotation);
-
-            // Ensure the spawned object has a collider set as trigger
-            Collider c = spawnedObject.GetComponent<Collider>();
-            if (c == null)
-            {
-                Debug.LogWarning("Spawned object has no Collider. Add a Collider (Is Trigger checked) to the prefab if you want player detection.");
-            }
-
-            // Attach or get the trigger helper component on the spawned object so it can notify this parent script
-            CosmicAttackTrigger trigger = spawnedObject.GetComponent<CosmicAttackTrigger>();
-            if (trigger == null)
-            {
-                trigger = spawnedObject.AddComponent<CosmicAttackTrigger>();
-            }
-            trigger.parentScript = this;
-
             spawnedObject.SetActive(true);
             Debug.Log($"Spawned object at spot {selectedSpotIndex}");
         }
