@@ -18,6 +18,9 @@ public class PlayerControls : MonoBehaviour
     private Animator animator;
     private bool isJumping = false; // Track if jump is in progress
 
+    private CosmicAttackTrigger cosmicAttackTrigger;
+
+
     private void Awake()
     {
         player = GetComponent<Rigidbody>();
@@ -48,11 +51,16 @@ public class PlayerControls : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && grounded && !isJumping)
         {
+
             animator.SetTrigger("attack");
             StartCoroutine(JumpSequence());
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        cosmicAttackTrigger = other.gameObject.GetComponent<CosmicAttackTrigger>();
     }
 
     private IEnumerator JumpSequence()
@@ -73,9 +81,14 @@ public class PlayerControls : MonoBehaviour
             
             float heightMultiplier = 4f * progress * (1f - progress);
             float currentHeight = startPosition.y + (JumpHeight * heightMultiplier);
-            
+
             transform.position = new Vector3(transform.position.x, currentHeight, startPosition.z);
             
+            if (cosmicAttackTrigger != null)
+            {
+                Debug.Log("Attack triggered on Cosmic Attack Trigger");
+                cosmicAttackTrigger.NotifyParentOfDestruction();
+            }
             yield return null; // Wait for next frame
         }
         
@@ -90,11 +103,6 @@ public class PlayerControls : MonoBehaviour
             grounded = true;
             isJumping = false; // Reset jump state when landing
             animator.ResetTrigger("jump");
-        }
-
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            print("GAME OVER!");
         }
     }
     

@@ -6,7 +6,7 @@ using System.Collections;
 public class ScoringSystem : MonoBehaviour
 {   
     [SerializeField] public int health;
-    [SerializeField] private int Score;
+    public int Score;
     [SerializeField] private TextMeshProUGUI scoreText; // UI Text reference to display score
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

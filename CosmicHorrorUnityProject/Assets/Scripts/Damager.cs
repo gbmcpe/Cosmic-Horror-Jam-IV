@@ -15,13 +15,13 @@ public class Damager : MonoBehaviour
     {
 
     }
-    
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-                playerHealth = collision.gameObject.GetComponent<Health>();
-                playerHealth.TakeDamage(Damage); 
+            playerHealth = other.gameObject.GetComponent<Health>();
+            playerHealth.TakeDamage(Damage); 
 
         }
         

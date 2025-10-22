@@ -12,23 +12,20 @@ public class CosmicAttackScript : MonoBehaviour
     private GameObject spawnedObject;
     
     [Header("Player Detection")]
-    public float countdownTime = 1f;
+    public float countdownTime = 2f;
     private bool playerInTrigger = false;
     private GameObject playerInside;
+    private CosmicAttackTrigger triggerScript;
 
-    public bool fullAttacks;
 
     
     void Start()
     {
-        fullAttacks = false;
         spotTaken = new List<bool>();
         for (int i = 0; i < spawnSpots.Count; i++)
         {
             spotTaken.Add(false);
         }
-
-
 
         StartCoroutine(SpawnObjectAtRandomSpot());
     }
@@ -52,7 +49,7 @@ public class CosmicAttackScript : MonoBehaviour
         if (availableSpots.Count == 0)
         {
             Debug.LogWarning("No available spawn spots!");
-            fullAttacks = true;
+            // END GAME HERE
             yield break;
         }
         
@@ -66,6 +63,29 @@ public class CosmicAttackScript : MonoBehaviour
         if (objectToSpawn != null && spawnSpots[selectedSpotIndex] != null)
         {
             spawnedObject = Instantiate(objectToSpawn, spawnSpots[selectedSpotIndex].position, spawnSpots[selectedSpotIndex].rotation);
+            
+            Collider attackCollider = spawnedObject.GetComponent<Collider>();
+            if (attackCollider != null && attackCollider.isTrigger)
+            {
+                Debug.Log("Attack object collider found and is set as trigger");
+                
+                triggerScript = spawnedObject.GetComponent<CosmicAttackTrigger>();
+                if (triggerScript == null)
+                {
+                    triggerScript = spawnedObject.AddComponent<CosmicAttackTrigger>();
+                }
+                triggerScript.parentScript = this;
+                triggerScript.laneIndex = selectedSpotIndex;
+            }
+            else if (attackCollider != null)
+            {
+                Debug.LogWarning("Attack object has collider but 'Is Trigger' is not checked!");
+            }
+            else
+            {
+                Debug.LogError("Attack object has no collider component!");
+            }
+
             spawnedObject.SetActive(true);
             Debug.Log($"Spawned object at spot {selectedSpotIndex}");
         }
@@ -92,11 +112,7 @@ public class CosmicAttackScript : MonoBehaviour
         Debug.Log("All spawn spots reset to available");
     }
 
-    // These trigger methods won't work since this script is not on the object with the collider
-    // You need to either:
-    // 1. Move this script to the attack object prefab, OR
-    // 2. Create a separate trigger script for the attack objects
-    
+    // Called by CosmicAttackTrigger component on spawned attack objects
     public void OnPlayerEnterAttack(GameObject player)
     {
         playerInTrigger = true;
@@ -115,17 +131,42 @@ public class CosmicAttackScript : MonoBehaviour
     private IEnumerator PlayerCountdown()
     {
         Debug.Log($"Cosmic attack countdown started: {countdownTime}s");
-        
-        // Simple yield wait for the countdown time
-        yield return new WaitForSeconds(countdownTime);
 
-        // If player is still in trigger after countdown, destroy them
+        yield return new WaitForSeconds(countdownTime);
         if (playerInTrigger && playerInside != null)
         {
             Debug.Log("Player stayed too long in cosmic attack - destroying player!");
-            Destroy(playerInside);
+
+            Health playerHealth = playerInside.GetComponent<Health>();
+            playerHealth.TakeDamage(1);
+
             playerInTrigger = false;
             playerInside = null;
+        }
+    }
+    
+    public void OnAttackObjectDestroyed(int laneIndex)
+    {
+        if (laneIndex >= 0 && laneIndex < spotTaken.Count)
+        {
+            spotTaken[laneIndex] = false;
+            playerInTrigger = false;
+            playerInside = null;
+            
+            // Destroy the spawned attack object if it exists
+            if (spawnedObject != null)
+            {
+                Destroy(spawnedObject);
+                Debug.Log($"Attack object in lane {laneIndex} destroyed - spot is now available");
+            }
+            else
+            {
+                Debug.LogWarning($"No attack object found to destroy in lane {laneIndex}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Invalid lane index received for attack object destruction");
         }
     }
 }

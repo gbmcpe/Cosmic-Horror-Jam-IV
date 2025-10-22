@@ -620,10 +620,7 @@ MonoBehaviour:
   - {fileID: 361192211}
   - {fileID: 1198399941}
   - {fileID: 1678374293}
-  - {fileID: 1360021185}
-  - {fileID: 1041999708}
   countdownTime: 1
-  fullAttacks: 0
 --- !u!114 &167699965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,7 +1254,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1479,7 +1476,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2089,7 +2086,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2492,7 +2489,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 222199655}
         m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
-        m_MethodName: ChangeSceneN
+        m_MethodName: ChangeSceneI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2909,7 +2906,7 @@ Transform:
   m_GameObject: {fileID: 1041999707}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 0, z: 0}
+  m_LocalPosition: {x: 4.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3252,7 +3249,7 @@ Transform:
   m_GameObject: {fileID: 1198399940}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 0, z: 0}
+  m_LocalPosition: {x: -7.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3270,7 +3267,7 @@ GameObject:
   - component: {fileID: 1210747661}
   - component: {fileID: 1210747660}
   m_Layer: 5
-  m_Name: PlayerScore
+  m_Name: HighScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4011,7 +4008,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4119,7 +4116,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4150,7 +4147,7 @@ Transform:
   m_GameObject: {fileID: 1360021184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0, z: 0}
+  m_LocalPosition: {x: -4.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4701,7 +4698,7 @@ Transform:
   m_GameObject: {fileID: 1678374292}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 0, z: 0}
+  m_LocalPosition: {x: 7.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5426,7 +5423,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069543393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5520,9 +5517,11 @@ MonoBehaviour:
   invuln: 0
   Broken: {fileID: 21300000, guid: 9a6d3cfd75a891140bfdca59977c17f6, type: 3}
   DeathUI: {fileID: 994678324}
+  playScore: {fileID: 1210747660}
   health1: {fileID: 1175542712}
   health2: {fileID: 1221538561}
   health3: {fileID: 1448084282}
+  scoring: {fileID: 167699965}
 --- !u!1 &2073769404
 GameObject:
   m_ObjectHideFlags: 0
