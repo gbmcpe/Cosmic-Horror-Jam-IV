@@ -17,8 +17,11 @@ public class PlayerControls : MonoBehaviour
     private bool grounded = true;
     private Animator animator;
     private bool isJumping = false; // Track if jump is in progress
+    private bool isAttacking = false; // Track if attack is in progress
 
     private CosmicAttackTrigger cosmicAttackTrigger;
+    [SerializeField] private AudioSource attackAudioSource; // AudioSource for attack sound
+    [SerializeField] private AudioClip attackSound; // Attack sound clip
 
 
     private void Awake()
@@ -44,6 +47,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && grounded && !isJumping)
         {
+            attackAudioSource.PlayOneShot(attackSound); // Play attack sound
             animator.SetTrigger("jump");
             StartCoroutine(JumpSequence());
         }
@@ -53,7 +57,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F) && grounded && !isJumping)
         {
-
+            attackAudioSource.PlayOneShot(attackSound); // Play attack sound
+            isAttacking = true;
             animator.SetTrigger("attack");
             StartCoroutine(JumpSequence());
         }
@@ -84,10 +89,11 @@ public class PlayerControls : MonoBehaviour
 
             transform.position = new Vector3(transform.position.x, currentHeight, startPosition.z);
             
-            if (cosmicAttackTrigger != null)
+            if (cosmicAttackTrigger != null && isAttacking)
             {
                 Debug.Log("Attack triggered on Cosmic Attack Trigger");
                 cosmicAttackTrigger.NotifyParentOfDestruction();
+                isAttacking = false;
             }
             yield return null; // Wait for next frame
         }

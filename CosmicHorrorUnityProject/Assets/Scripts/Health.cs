@@ -15,12 +15,15 @@ public class Health : MonoBehaviour
     public GameObject DeathUI;
     public TextMeshProUGUI playScore; // Reference to the playScore text object in DeathUI
     private int HighScore;
+    public GameObject Character;
     
     
     [SerializeField] private Image health1;
     [SerializeField] private Image health2;
     [SerializeField] private Image health3;
     [SerializeField] private ScoringSystem scoring;
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioSource audioSource;
     
     void Start()
     {
@@ -51,7 +54,10 @@ public class Health : MonoBehaviour
                 Debug.Log("High Score: " + scoring.Score.ToString());
                 playScore.text = HighScore.ToString();
                 
+                audioSource.Stop();
+                audioSource.PlayOneShot(deathSound);
                 // SceneManager.LoadScene("Main Menu");
+
         
 
             }
@@ -68,7 +74,9 @@ public class Health : MonoBehaviour
     IEnumerator Invulntime()
     {
         invuln = true;
-        yield return new WaitForSeconds(1f);
+        Character.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
+        yield return new WaitForSeconds(2f);
         invuln = false;
+        Character.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
     }
 }
