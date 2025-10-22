@@ -21,11 +21,14 @@ public class MenuScript : MonoBehaviour
     public void ChangeSceneN()
     {
         SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1f; // Resume game time
+
     }
 
     // Alternative function to change scene by build index
     public void ChangeSceneI()
     {
         SceneManager.LoadScene(sceneIndex);
+        Time.timeScale = 1f; // Resume game time
     }
 }
