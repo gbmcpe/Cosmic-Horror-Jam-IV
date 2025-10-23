@@ -7,6 +7,7 @@ public class CosmicAttackScript : MonoBehaviour
     [Header("Spawn Settings")]
     public GameObject objectToSpawn;
     public List<Transform> spawnSpots;
+    public List<Sprite> randomSprites;
 
     private List<bool> spotTaken;
     private List<GameObject> spawnedObjects;
@@ -64,7 +65,8 @@ public class CosmicAttackScript : MonoBehaviour
 
         if (objectToSpawn != null && spawnSpots[selectedSpotIndex] != null)
         {
-            GameObject newSpawnedObject = Instantiate(objectToSpawn, spawnSpots[selectedSpotIndex].position, spawnSpots[selectedSpotIndex].rotation);
+            Vector3 spawnPosition = spawnSpots[selectedSpotIndex].position + new Vector3(0, 4, 0);
+            GameObject newSpawnedObject = Instantiate(objectToSpawn, spawnPosition, spawnSpots[selectedSpotIndex].rotation);
             spawnedObjects[selectedSpotIndex] = newSpawnedObject;
             
             Collider attackCollider = newSpawnedObject.GetComponent<Collider>();
@@ -88,6 +90,12 @@ public class CosmicAttackScript : MonoBehaviour
             {
                 Debug.LogError("Attack object has no collider component!");
             }
+            // Randomly change sprite of child objects
+            if (randomSprites != null && randomSprites.Count > 0)
+            {
+                ChangeChildSprites(newSpawnedObject);
+            }
+            
             newSpawnedObject.SetActive(true);
             Debug.Log($"Spawned object at spot {selectedSpotIndex}");
         }
@@ -175,6 +183,26 @@ public class CosmicAttackScript : MonoBehaviour
         else
         {
             Debug.LogWarning("Invalid lane index received for attack object destruction");
+        }
+    }
+    
+    private void ChangeChildSprites(GameObject parentObject)
+    {
+        // Get all SpriteRenderer components in children (including the parent)
+        SpriteRenderer[] spriteRenderers = parentObject.GetComponentsInChildren<SpriteRenderer>();
+        
+        foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+        {
+            if (spriteRenderer != null)
+            {
+                // Pick a random sprite from the list
+                int randomIndex = Random.Range(0, randomSprites.Count);
+                Sprite randomSprite = randomSprites[randomIndex];
+                
+                // Change the sprite
+                spriteRenderer.sprite = randomSprite;
+                Debug.Log($"Changed sprite to: {randomSprite.name}");
+            }
         }
     }
 }
