@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 
 public class InfiniteGeneration : MonoBehaviour
@@ -25,10 +26,12 @@ private int difficulty = 1;
     {
         if (CreatingObstacle == false)
         {
-        CreatingObstacle = true;
-        StartCoroutine(ObstacleGen());
-        } 
+            CreatingObstacle = true;
+            StartCoroutine(ObstacleGen());
+            
+        }
     }
+       
 
 
 private void SetPosition(GameObject Entity, Transform Position)
@@ -75,7 +78,8 @@ private void SetPosition(GameObject Entity, Transform Position)
         }
 
 
-        
+
+
 
         Clone.SetActive(true);
     
