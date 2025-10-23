@@ -6,7 +6,8 @@ public class ObstacleMover : MonoBehaviour
 
     private float speed = 10;
     public int width;
-    
+    public int stopPosition = -10;
+
     private Rigidbody ObRigid;
 
     private int difficulty;
@@ -25,7 +26,7 @@ public class ObstacleMover : MonoBehaviour
        ObRigid.linearVelocity = new Vector3(0, 0, -speed);
 
 
-        if (ObRigid.position.z < -10)
+        if (ObRigid.position.z < stopPosition)
         { Destroy(gameObject); }
     }
 }

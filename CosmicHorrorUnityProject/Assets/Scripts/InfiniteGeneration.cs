@@ -16,7 +16,7 @@ private bool CreatingObstacle = false;
 
 private int difficulty = 1;
 
-    private int counter = 0;
+    public int counter = 0;
 
 
 
