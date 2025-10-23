@@ -9,7 +9,7 @@ public class CosmicAttackScript : MonoBehaviour
     public List<Transform> spawnSpots;
 
     private List<bool> spotTaken;
-    private GameObject spawnedObject;
+    private List<GameObject> spawnedObjects;
     
     [Header("Player Detection")]
     public float countdownTime = 2f;
@@ -22,9 +22,11 @@ public class CosmicAttackScript : MonoBehaviour
     void Start()
     {
         spotTaken = new List<bool>();
+        spawnedObjects = new List<GameObject>();
         for (int i = 0; i < spawnSpots.Count; i++)
         {
             spotTaken.Add(false);
+            spawnedObjects.Add(null);
         }
 
         StartCoroutine(SpawnObjectAtRandomSpot());
@@ -62,17 +64,18 @@ public class CosmicAttackScript : MonoBehaviour
 
         if (objectToSpawn != null && spawnSpots[selectedSpotIndex] != null)
         {
-            spawnedObject = Instantiate(objectToSpawn, spawnSpots[selectedSpotIndex].position, spawnSpots[selectedSpotIndex].rotation);
+            GameObject newSpawnedObject = Instantiate(objectToSpawn, spawnSpots[selectedSpotIndex].position, spawnSpots[selectedSpotIndex].rotation);
+            spawnedObjects[selectedSpotIndex] = newSpawnedObject;
             
-            Collider attackCollider = spawnedObject.GetComponent<Collider>();
+            Collider attackCollider = newSpawnedObject.GetComponent<Collider>();
             if (attackCollider != null && attackCollider.isTrigger)
             {
                 Debug.Log("Attack object collider found and is set as trigger");
                 
-                triggerScript = spawnedObject.GetComponent<CosmicAttackTrigger>();
+                triggerScript = newSpawnedObject.GetComponent<CosmicAttackTrigger>();
                 if (triggerScript == null)
                 {
-                    triggerScript = spawnedObject.AddComponent<CosmicAttackTrigger>();
+                    triggerScript = newSpawnedObject.AddComponent<CosmicAttackTrigger>();
                 }
                 triggerScript.parentScript = this;
                 triggerScript.laneIndex = selectedSpotIndex;
@@ -85,7 +88,7 @@ public class CosmicAttackScript : MonoBehaviour
             {
                 Debug.LogError("Attack object has no collider component!");
             }
-            spawnedObject.SetActive(true);
+            newSpawnedObject.SetActive(true);
             Debug.Log($"Spawned object at spot {selectedSpotIndex}");
         }
         
@@ -107,6 +110,11 @@ public class CosmicAttackScript : MonoBehaviour
         for (int i = 0; i < spotTaken.Count; i++)
         {
             spotTaken[i] = false;
+            if (spawnedObjects[i] != null)
+            {
+                Destroy(spawnedObjects[i]);
+                spawnedObjects[i] = null;
+            }
         }
         Debug.Log("All spawn spots reset to available");
     }
@@ -152,10 +160,11 @@ public class CosmicAttackScript : MonoBehaviour
             playerInTrigger = false;
             playerInside = null;
             
-            // Destroy the spawned attack object if it exists
-            if (spawnedObject != null)
+            // Destroy the specific spawned attack object if it exists
+            if (spawnedObjects[laneIndex] != null)
             {
-                Destroy(spawnedObject);
+                Destroy(spawnedObjects[laneIndex]);
+                spawnedObjects[laneIndex] = null;
                 Debug.Log($"Attack object in lane {laneIndex} destroyed - spot is now available");
             }
             else
