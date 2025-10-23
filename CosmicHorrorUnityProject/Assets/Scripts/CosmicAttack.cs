@@ -64,30 +64,18 @@ public class CosmicAttackScript : MonoBehaviour
         {
             spawnedObject = Instantiate(objectToSpawn, spawnSpots[selectedSpotIndex].position, spawnSpots[selectedSpotIndex].rotation);
             
-<<<<<<< Updated upstream
-=======
-            // Get the collider from the spawned attack object
->>>>>>> Stashed changes
             Collider attackCollider = spawnedObject.GetComponent<Collider>();
             if (attackCollider != null && attackCollider.isTrigger)
             {
                 Debug.Log("Attack object collider found and is set as trigger");
                 
-<<<<<<< Updated upstream
                 triggerScript = spawnedObject.GetComponent<CosmicAttackTrigger>();
-=======
-                // Add trigger detection to the spawned object that references back to this script
-                CosmicAttackTrigger triggerScript = spawnedObject.GetComponent<CosmicAttackTrigger>();
->>>>>>> Stashed changes
                 if (triggerScript == null)
                 {
                     triggerScript = spawnedObject.AddComponent<CosmicAttackTrigger>();
                 }
                 triggerScript.parentScript = this;
-<<<<<<< Updated upstream
                 triggerScript.laneIndex = selectedSpotIndex;
-=======
->>>>>>> Stashed changes
             }
             else if (attackCollider != null)
             {
@@ -97,11 +85,6 @@ public class CosmicAttackScript : MonoBehaviour
             {
                 Debug.LogError("Attack object has no collider component!");
             }
-<<<<<<< Updated upstream
-
-=======
-            
->>>>>>> Stashed changes
             spawnedObject.SetActive(true);
             Debug.Log($"Spawned object at spot {selectedSpotIndex}");
         }

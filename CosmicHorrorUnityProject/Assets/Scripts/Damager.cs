@@ -20,19 +20,9 @@ public class Damager : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-<<<<<<< Updated upstream
             playerHealth = other.gameObject.GetComponent<Health>();
             playerHealth.TakeDamage(Damage); 
 
-=======
-            if (hurt == false)
-            {
-                hurt = true;
-                playerHealth = other.gameObject.GetComponent<Health>();
-                playerHealth.TakeDamage(Damage); 
-                hurt = false;
-            }
->>>>>>> Stashed changes
         }
         
     }
