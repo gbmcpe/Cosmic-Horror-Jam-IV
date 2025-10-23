@@ -4,13 +4,19 @@ public class CosmicAttackTrigger : MonoBehaviour
 {
     [HideInInspector]
     public CosmicAttackScript parentScript;
+<<<<<<< Updated upstream
     public int laneIndex;
+=======
+>>>>>>> Stashed changes
 
     private void OnTriggerEnter(Collider other)
     {
         if (parentScript != null && other.CompareTag("Player"))
         {
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             parentScript.OnPlayerEnterAttack(other.gameObject);
         }
     }
@@ -22,6 +28,7 @@ public class CosmicAttackTrigger : MonoBehaviour
             parentScript.OnPlayerExitAttack(other.gameObject);
         }
     }
+<<<<<<< Updated upstream
 
     public void NotifyParentOfDestruction()
     {
@@ -31,4 +38,6 @@ public class CosmicAttackTrigger : MonoBehaviour
             parentScript.OnAttackObjectDestroyed(laneIndex);
         }
     }
+=======
+>>>>>>> Stashed changes
 }
